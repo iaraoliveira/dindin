@@ -57,7 +57,7 @@ requisito será detalhado nas semanas seguintes.
 ## :chart_with_upwards_trend: Diagrama
 
 <div align="center">
-  <img src="./.github/diagramaDinDin.drawio.png" alt="Imagem do diagrama" width="800" >
+  <img src="./.github/diagramaDinDin.drawio.png" alt="Imagem do diagrama" width="650" >
   <p>Diagrama de classe feito no draw.io</p>
 </div>
 
