@@ -21,6 +21,16 @@ Apresentação do trabalho no dia: <b>?</b><br/>
 
 O objetivo do trabalho é implementar um programa em Java Desktop, com interface gráfica de usuário (GUI), afim de ser utilizado para controlar as receitas e despesas domésticas de uma pessoa.
 
+#### REFERENCIAS
+
+_ https://dribbble.com/shots/18527461-App-Despesas-planejadas
+_ https://dribbble.com/shots/16247633-bills-dashboard
+_ https://dribbble.com/shots/14722427-Dashboard
+
+#### PROTÓTIPO FIGMA
+
+_ https://www.figma.com/file/5ZTDUd5UqRhfc8Q26RT1yI/DinDin?type=design&node-id=0%3A1&mode=design&t=D65RxeVnSBhkQQZp-1
+
 
 <br/>
 <a name="requisitos"/>
