@@ -23,9 +23,9 @@ O objetivo do trabalho é implementar um programa em Java Desktop, com interface
 
 #### REFERENCIAS
 
-_ https://dribbble.com/shots/18527461-App-Despesas-planejadas
-_ https://dribbble.com/shots/16247633-bills-dashboard
-_ https://dribbble.com/shots/14722427-Dashboard
+_ https://dribbble.com/shots/18527461-App-Despesas-planejadas </br>
+_ https://dribbble.com/shots/16247633-bills-dashboard </br>
+_ https://dribbble.com/shots/14722427-Dashboard </br>
 
 #### PROTÓTIPO FIGMA
 
