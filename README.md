@@ -30,7 +30,10 @@ _ https://dribbble.com/shots/14722427-Dashboard </br>
 #### PROTÓTIPO FIGMA
 
 _ https://www.figma.com/file/5ZTDUd5UqRhfc8Q26RT1yI/DinDin?type=design&node-id=0%3A1&mode=design&t=D65RxeVnSBhkQQZp-1
-
+<div align="center">
+  <img src="./.github/screenshotPrototipoFigma-homepage.jpeg" alt="Imagem do projeto no Figma" width="650" >
+  <p>Imagem do Projeto no Figma</p>
+</div>
 
 <br/>
 <a name="requisitos"/>
