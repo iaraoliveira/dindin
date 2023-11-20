@@ -4,13 +4,21 @@
  */
 package model;
 
+import java.time.LocalDate;
+import model.categorias.CategoriaDespesa;
+
 /**
  *
  * @author iara9
  */
 public class Despesa extends Lancamento {
     
-    public Despesa() {
+    
+
+    private CategoriaDespesa categoria;
+    
+    public Despesa(String nome, LocalDate data, double valor, CategoriaDespesa categoria) {
+        super(nome, data, valor, categoria.getDescricao());
     }
 
     

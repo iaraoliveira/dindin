@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package model;
 
@@ -12,28 +12,18 @@ import java.util.ArrayList;
  * @author iara9
  */
 public class Lancamento {
-    private int id;
-    private LocalDate data;
     private String nome;
-
-    public Lancamento() {
-    }
-
-    public void adicionarLancamento(LocalDate data) {
-        //TODO implementar adicionar novo lancamento
+    private LocalDate data;
+    private double valor;
+    private String categoria;
+    
+    public Lancamento(String nome, LocalDate data, double valor, String categoria) {
+        this.nome = nome;
+        this.data = data;
+        this.valor = valor;
+        this.categoria = categoria;
     }
     
-    public ArrayList<Lancamento> listarLançamentos (){
-        ArrayList<Lancamento> lancamentos = new ArrayList<Lancamento>();
-        
-        // TODO implementar buscar todos os lançamentos
-        
-        return lancamentos;
-    }
-    public int getId() {
-        return id;
-    }
-
     public LocalDate getData() {
         return data;
     }
@@ -42,10 +32,14 @@ public class Lancamento {
         return nome;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public double getValor() {
+        return valor;
     }
 
+    public String getCategoria() {
+        return categoria;
+    }
+    
     public void setData(LocalDate data) {
         this.data = data;
     }
@@ -53,6 +47,13 @@ public class Lancamento {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
     
 }
