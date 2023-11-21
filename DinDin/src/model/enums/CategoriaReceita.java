@@ -2,7 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model.categorias;
+package model.enums;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -15,6 +18,16 @@ public enum CategoriaReceita {
     OUTROS("Outros");
     
     private String descricao;
+    
+     // Cria uma listagem com as categorias existentes e suas descrições
+    private static final Map<String, CategoriaReceita> categorias = new HashMap<String, CategoriaReceita>();
+    
+    static {
+        for (CategoriaReceita c : CategoriaReceita.values()) {
+            categorias.put(c.getDescricao(), c);
+        }
+    }
+    
 
     private CategoriaReceita(String descricao) {
         this.descricao = descricao;
@@ -24,4 +37,13 @@ public enum CategoriaReceita {
         return descricao;
     }
 
+    /**
+     * Busca o enum com descrição correspodente à String passada por parâmetro
+     * @param descricao
+     * @return categoria corresponde encontrada ou null
+     */
+    public static CategoriaReceita findByDescricao(String descricao){
+        
+        return categorias.get(descricao);
+    }
 }
