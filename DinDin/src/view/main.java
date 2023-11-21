@@ -7,8 +7,10 @@ package view;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import model.Conta;
 import model.Importador;
+import model.Lancamento;
 
 /**
  *
@@ -36,6 +38,12 @@ public class main {
         System.out.println(c.getSaldo());
         
         System.out.println(c.getSaldo(LocalDate.parse("2023-11-05")));
+        
+        ArrayList<Lancamento> lancamentos = c.getLancamentos(LocalDate.parse("2023-11-05"));
+        
+        for (Lancamento l : lancamentos) {
+            System.out.println(l.getNome() +" | "+ l.getData());
+        }
         
     }
     
