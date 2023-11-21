@@ -6,6 +6,7 @@ package view;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import model.Conta;
 import model.Importador;
 
@@ -32,7 +33,9 @@ public class main {
             System.out.println(e.getMessage());
         }
         
-        System.out.println(c.getReceitas());
+        System.out.println(c.getSaldo());
+        
+        System.out.println(c.getSaldo(LocalDate.parse("2023-11-05")));
         
     }
     
