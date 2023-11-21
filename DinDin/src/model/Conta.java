@@ -2,6 +2,8 @@ package model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import model.enums.CategoriaDespesa;
 
 /*
@@ -19,31 +21,22 @@ public class Conta {
     //listas de despesas e receitas
     private ArrayList<Despesa> despesas;
     private ArrayList<Receita> receitas;
+    private ArrayList<Lancamento> lancamentos;
     
     
     public Conta() {
         despesas = new ArrayList<>();
         receitas = new ArrayList<>();
+        lancamentos = new ArrayList<>();
     }
     
-    public ArrayList<Despesa> getDespesas(){
-        return despesas;
-    }
-    
-    public ArrayList<Receita> getReceitas(){
-        return receitas;
-    }
-    
-    public void getLancamentos(){
-        
-    }
-    
-    /**
+      /**
      * Inclui nova despesa e faz decremento no valor do saldo caso a data da despesa já tenha passado
      * @param despesa 
      */
     public void incluirDespesa(Despesa d){
         despesas.add(d);
+        lancamentos.add(d);
         
         //decrementa saldo da conta
         LocalDate today = LocalDate.now();
@@ -59,6 +52,8 @@ public class Conta {
      */
     public void incluirReceita(Receita r){
         receitas.add(r);
+        lancamentos.add(r);
+
         
         // incrementa saldo da conta
         LocalDate today = LocalDate.now();
@@ -99,8 +94,29 @@ public class Conta {
     public double getSaldo() {
         return saldo;
     }
+  
+    public ArrayList<Despesa> getDespesas(){
+    return despesas;
+    }
     
-    public void setSaldo(double saldo) {
+    public ArrayList<Receita> getReceitas(){
+        return receitas;
+    }
+    
+    public ArrayList<Lancamento> getLancamentos(LocalDate dt){
+        
+
+        return sortLancamentosByDate(dt);
+    }
+    
+    private ArrayList<Lancamento> sortLancamentosByDate(LocalDate dt){
+        
+        lancamentos.sort(Comparator.comparing(o -> o.getData()));    
+        return lancamentos;
+    }
+    
+    
+    private void setSaldo(double saldo) {
         this.saldo = saldo;
     }
       
