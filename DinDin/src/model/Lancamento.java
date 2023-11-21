@@ -5,8 +5,6 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import model.enums.TipoLancamento;
 
 /**
  *

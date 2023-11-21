@@ -27,15 +27,16 @@ public class Importador {
       
         try(Scanner sc = new Scanner(arquivo,"UTF-8")){
             
+            //desprezando o cabeçalho do arquivo
             if (sc.hasNextLine()){
                 sc.nextLine();
             }
-            
+                       
             while(sc.hasNextLine()){
                 
                 String linha = sc.nextLine();
                 String[] dados = linha.split(";");
-                
+                           
                 String nomeDespesa = dados[0];
                 LocalDate dataDespesa = LocalDate.parse(dados[1], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 double valorDespesa = Double.parseDouble(dados[2]);

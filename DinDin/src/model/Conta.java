@@ -14,7 +14,6 @@ import model.enums.CategoriaDespesa;
  * @author iara9
  */
 public class Conta {
-    private String nome;
     private float saldo;
 
     //listas de despesas e receitas
@@ -22,50 +21,24 @@ public class Conta {
     private ArrayList<Receita> receitas;
     
     
-    public Conta(String nome) {
-        this.nome = nome;
-        
+    public Conta() {
         despesas = new ArrayList<>();
         receitas = new ArrayList<>();
     }
-
-    /**
-     * Este método é utilizado para consultar o saldo disponível em conta no dia atual (now)
-     * @return saldo - valor com duas casa decimais após a vírgula referente ao saldo atual da conta
-     */
-    public double consultarSaldo(){
-        double saldo = 0;
-        //TO-DO : implementar consultaSaldo
-        
-        return saldo;
+    
+    public ArrayList<Despesa> getDespesas(){
+        return despesas;
     }
     
-    /**
-     * Este método é utilizado para consultar o saldo disponível em conta 
-     * considerando os lancamentos com data igual ou menos que o dia informado pro parâmetro
-     * @param data - data para filtragem dos lancamentos
-     * @return saldo - valor com duas casa decimais após a vírgula referente ao saldo da conta até o dia especificado
-     */
-    public double consultarSaldo(LocalDate data){
-        double saldo = 0;
-        //TO-DO : implementar consultaSaldo
-        
-        return saldo;
-    }
-    
-    public void getDespesas(){
-        
-    }
-    
-    public void getReceitas(){
-        
+    public ArrayList<Receita> getReceitas(){
+        return receitas;
     }
     
     public void getLancamentos(){
         
     }
     
-       /**
+    /**
      * inclui nova despesa
      * @param despesa 
      */
@@ -80,20 +53,27 @@ public class Conta {
     public void incluirReceita(Receita r){
         receitas.add(r);
     }
-    
-    
-    public String getNome() {
-        return nome;
-    }
 
+    
+    /**
+     * Este método é utilizado para consultar o saldo disponível em conta no dia atual (now)
+     * @return saldo - valor com duas casa decimais após a vírgula referente ao saldo atual da conta
+     */
     public float getSaldo() {
         return saldo;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    /**
+     * Este método é utilizado para consultar o saldo disponível em conta 
+     * considerando os lancamentos com data igual ou menos que o dia informado pro parâmetro
+     * @param data - data para filtragem dos lancamentos
+     * @return saldo - valor com duas casa decimais após a vírgula referente ao saldo da conta até o dia especificado
+     */
+    public double getSaldo(LocalDate data){
+        return saldo;
 
+    }
+    
     public void setSaldo(float saldo) {
         this.saldo = saldo;
     }
