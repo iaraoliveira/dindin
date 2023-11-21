@@ -5,7 +5,7 @@
 package model;
 
 import java.time.LocalDate;
-import model.categorias.CategoriaDespesa;
+import model.enums.CategoriaDespesa;
 
 /**
  *
@@ -13,13 +13,10 @@ import model.categorias.CategoriaDespesa;
  */
 public class Despesa extends Lancamento {
     
-    
-
     private CategoriaDespesa categoria;
     
     public Despesa(String nome, LocalDate data, double valor, CategoriaDespesa categoria) {
         super(nome, data, valor, categoria.getDescricao());
     }
-
     
 }
