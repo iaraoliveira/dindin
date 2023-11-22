@@ -29,6 +29,10 @@ public class App extends javax.swing.JFrame {
         bg = new javax.swing.JPanel();
         menuContainer = new javax.swing.JPanel();
         homepageContainer = new javax.swing.JPanel();
+        jTabbedPane_listagemContainer = new javax.swing.JTabbedPane();
+        jPanel_listaReceitas = new javax.swing.JPanel();
+        jPanel_ListaDespesas = new javax.swing.JPanel();
+        jPanel_listaLancamentos = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,15 +56,69 @@ public class App extends javax.swing.JFrame {
 
         homepageContainer.setBackground(new java.awt.Color(238, 238, 238));
 
+        jTabbedPane_listagemContainer.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane_listagemContainer.setForeground(new java.awt.Color(51, 51, 51));
+
+        jPanel_listaReceitas.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel_listaReceitasLayout = new javax.swing.GroupLayout(jPanel_listaReceitas);
+        jPanel_listaReceitas.setLayout(jPanel_listaReceitasLayout);
+        jPanel_listaReceitasLayout.setHorizontalGroup(
+            jPanel_listaReceitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 650, Short.MAX_VALUE)
+        );
+        jPanel_listaReceitasLayout.setVerticalGroup(
+            jPanel_listaReceitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 415, Short.MAX_VALUE)
+        );
+
+        jTabbedPane_listagemContainer.addTab("Receitas", jPanel_listaReceitas);
+
+        jPanel_ListaDespesas.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel_ListaDespesasLayout = new javax.swing.GroupLayout(jPanel_ListaDespesas);
+        jPanel_ListaDespesas.setLayout(jPanel_ListaDespesasLayout);
+        jPanel_ListaDespesasLayout.setHorizontalGroup(
+            jPanel_ListaDespesasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 650, Short.MAX_VALUE)
+        );
+        jPanel_ListaDespesasLayout.setVerticalGroup(
+            jPanel_ListaDespesasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 415, Short.MAX_VALUE)
+        );
+
+        jTabbedPane_listagemContainer.addTab("Despesas", jPanel_ListaDespesas);
+
+        jPanel_listaLancamentos.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel_listaLancamentosLayout = new javax.swing.GroupLayout(jPanel_listaLancamentos);
+        jPanel_listaLancamentos.setLayout(jPanel_listaLancamentosLayout);
+        jPanel_listaLancamentosLayout.setHorizontalGroup(
+            jPanel_listaLancamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 650, Short.MAX_VALUE)
+        );
+        jPanel_listaLancamentosLayout.setVerticalGroup(
+            jPanel_listaLancamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 415, Short.MAX_VALUE)
+        );
+
+        jTabbedPane_listagemContainer.addTab("Lancamentos", jPanel_listaLancamentos);
+
         javax.swing.GroupLayout homepageContainerLayout = new javax.swing.GroupLayout(homepageContainer);
         homepageContainer.setLayout(homepageContainerLayout);
         homepageContainerLayout.setHorizontalGroup(
             homepageContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 710, Short.MAX_VALUE)
+            .addGroup(homepageContainerLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jTabbedPane_listagemContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         homepageContainerLayout.setVerticalGroup(
             homepageContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homepageContainerLayout.createSequentialGroup()
+                .addContainerGap(128, Short.MAX_VALUE)
+                .addComponent(jTabbedPane_listagemContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         bg.add(homepageContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 710, 600));
@@ -117,6 +175,10 @@ public class App extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JPanel homepageContainer;
+    private javax.swing.JPanel jPanel_ListaDespesas;
+    private javax.swing.JPanel jPanel_listaLancamentos;
+    private javax.swing.JPanel jPanel_listaReceitas;
+    private javax.swing.JTabbedPane jTabbedPane_listagemContainer;
     private javax.swing.JPanel menuContainer;
     // End of variables declaration//GEN-END:variables
 }
