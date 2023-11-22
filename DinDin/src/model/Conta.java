@@ -103,13 +103,28 @@ public class Conta {
         return receitas;
     }
     
-    public ArrayList<Lancamento> getLancamentos(LocalDate dt){
+    public ArrayList<Lancamento> getLancamentos(){
         
-
-        return sortLancamentosByDate(dt);
+        return sortLancamentosByDate(lancamentos);
     }
     
-    private ArrayList<Lancamento> sortLancamentosByDate(LocalDate dt){
+    public ArrayList<Lancamento> getLancamentos(LocalDate dt){
+        
+        ArrayList<Lancamento> lancamentosFiltradosPorData = new ArrayList<>();
+        
+        for (Lancamento l : lancamentos) {
+            if (l.getData().isBefore(dt) || l.getData().isEqual(dt))
+            lancamentosFiltradosPorData.add(l);
+        }
+        return sortLancamentosByDate(lancamentosFiltradosPorData);
+    }
+    
+    /**
+     * Recebe uma lista de lançamentos e os ordena por data
+     * @param lancamentos - lista de lançamentos
+     * @return - lista de lançamentos ordenados por data
+     */
+    private ArrayList<Lancamento> sortLancamentosByDate(ArrayList<Lancamento> lancamentos){
         
         lancamentos.sort(Comparator.comparing(o -> o.getData()));    
         return lancamentos;

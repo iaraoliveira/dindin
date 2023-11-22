@@ -34,12 +34,12 @@ public class main {
         }catch(FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
+//        
+//        System.out.println(c.getSaldo());
+//        
+//        System.out.println(c.getSaldo(LocalDate.parse("2023-11-05")));
         
-        System.out.println(c.getSaldo());
-        
-        System.out.println(c.getSaldo(LocalDate.parse("2023-11-05")));
-        
-        ArrayList<Lancamento> lancamentos = c.getLancamentos(LocalDate.parse("2023-11-05"));
+        ArrayList<Lancamento> lancamentos = c.getLancamentos(LocalDate.now());
         
         for (Lancamento l : lancamentos) {
             System.out.println(l.getNome() +" | "+ l.getData());
