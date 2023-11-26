@@ -7,10 +7,13 @@ package model;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import model.Conta;
 import model.Importador;
 import model.Lancamento;
+import model.enums.CategoriaDespesa;
+import model.enums.CategoriaReceita;
 
 /**
  *
@@ -25,8 +28,11 @@ public class main {
         Conta c = new Conta();
         Importador importador = new Importador(c);
         
-        File arquivoDespesas = new File("C:\\Users\\iara9\\Projects\\dindin\\DinDin\\res\\despesas.csv");
-        File arquivoReceitas = new File("C:\\Users\\iara9\\Projects\\dindin\\DinDin\\res\\receitas.csv");
+        String pathDespesasCSV = new File("res/despesas.csv").getAbsolutePath();
+        String pathReceitasCSV = new File("res/receitas.csv").getAbsolutePath();
+        
+        File arquivoDespesas = new File(pathDespesasCSV);
+        File arquivoReceitas = new File(pathReceitasCSV);
         
         try {
             importador.carregarArquivoDespesas(arquivoDespesas);
@@ -34,16 +40,23 @@ public class main {
         }catch(FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
-//        
-//        System.out.println(c.getSaldo());
-//        
-//        System.out.println(c.getSaldo(LocalDate.parse("2023-11-05")));
         
+        //Conta de Luz;2023-11-15;56.80;Residência
+        LocalDate dataDespesa = LocalDate.of(2023, 11, 15);
+        Despesa d = new Despesa("Conta de Luz", dataDespesa , 56.80, CategoriaDespesa.RESIDENCIA);
+        c.incluirDespesa(d);
+        
+        System.out.println(c.getSaldo());
+                
         ArrayList<Lancamento> lancamentos = c.getLancamentos(LocalDate.now());
         
         for (Lancamento l : lancamentos) {
             System.out.println(l.getNome() +" | "+ l.getData());
         }
+        
+        Exportador exportador = new Exportador(c);
+        exportador.exportaDespesas(arquivoDespesas);
+        exportador.exportaReceitas(arquivoReceitas);
         
     }
     

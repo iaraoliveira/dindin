@@ -1,6 +1,3 @@
 Nome;Data;Valor;Categoria
-Salário;2023-11-15;3500;Salário
-Ganhos Stud.io;2023-11-03;71;Outros
-Zaori;2023-11-22;380;Outros
-Aluguel;2023-11-11;3050;Outros
-Parcela venda máquina de corte;2023-11-18;100;Outros
+Salário;2023-11-15;3500.0;Salário
+Aluguel;2023-11-11;3050.0;Outros
