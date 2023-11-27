@@ -5,7 +5,10 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
+import javax.swing.SwingUtilities;
 
 public class Card extends javax.swing.JPanel {
 
@@ -49,6 +52,12 @@ public class Card extends javax.swing.JPanel {
         lbValues = new javax.swing.JLabel();
         lbDescription = new javax.swing.JLabel();
 
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                formMouseEntered(evt);
+            }
+        });
+
         lbTitle.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(255, 255, 255));
         lbTitle.setText("Title");
@@ -60,6 +69,11 @@ public class Card extends javax.swing.JPanel {
         lbDescription.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         lbDescription.setForeground(new java.awt.Color(255, 255, 255));
         lbDescription.setText("Description");
+        lbDescription.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lbDescriptionMouseMoved(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -86,6 +100,14 @@ public class Card extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formMouseEntered
+
+    private void lbDescriptionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDescriptionMouseMoved
+//        lbDescription.setBackground(new Color(16,72,149));
+    }//GEN-LAST:event_lbDescriptionMouseMoved
+
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
@@ -99,6 +121,7 @@ public class Card extends javax.swing.JPanel {
         super.paintComponent(grphcs);
     }
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lbDescription;
     private javax.swing.JLabel lbTitle;

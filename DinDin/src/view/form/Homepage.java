@@ -1,7 +1,6 @@
 package view.form;
 
 import view.model.ModelCard;
-import view.model.TipoStatus;
 import view.swing.ScrollBar;
 import java.awt.Color;
 import java.io.File;
@@ -9,8 +8,6 @@ import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
@@ -115,7 +112,9 @@ public class Homepage extends javax.swing.JPanel {
         }
     }
      
-    
+    public void actionButton(){
+        System.out.println("Action Button");
+    }
      
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -219,7 +218,6 @@ public class Homepage extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void card1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_card1MouseClicked
-        
         clearTableRows();
         populaTabelaLancamentos(c, LocalDate.now());
     }//GEN-LAST:event_card1MouseClicked
