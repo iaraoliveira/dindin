@@ -10,15 +10,19 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.io.File;
+import java.io.FileNotFoundException;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import model.Conta;
+import model.Importador;
 
 /**
  *
  * @author RAVEN
  */
 public class App extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form Main
      */
@@ -31,7 +35,7 @@ public class App extends javax.swing.JFrame {
         initMoving(this);
         
         //  set when system open start with home form
-        setForm(new Homepage());
+        setForm(home);
     }
 
     private void setForm(JComponent com) {
@@ -126,6 +130,7 @@ public class App extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new App().setVisible(true);
             }
         });
@@ -150,8 +155,7 @@ public class App extends javax.swing.JFrame {
         });
         
     }
-
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.component.Header header;
     private javax.swing.JPanel mainPanel;

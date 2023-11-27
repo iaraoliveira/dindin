@@ -17,7 +17,6 @@ import java.text.DecimalFormat;
 public class Exportador {
     
     private Conta conta;
-    DecimalFormat df = new DecimalFormat("0.00");  
     
     public Exportador(Conta conta){
        this.conta = conta; 

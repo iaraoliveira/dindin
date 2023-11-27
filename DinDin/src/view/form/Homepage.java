@@ -4,20 +4,35 @@ import view.model.ModelCard;
 import view.model.TipoStatus;
 import view.swing.ScrollBar;
 import java.awt.Color;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
+import model.Conta;
+import model.Despesa;
+import model.Importador;
+import model.Lancamento;
+import model.Receita;
 
 public class Homepage extends javax.swing.JPanel {
-
+    
+    Conta c = new Conta();
+    DecimalFormat df = new DecimalFormat("0.00"); 
+    
     public Homepage() {
+        importaDados(c);
         initComponents();
         setOpaque(false);
+                
+        populaCards(c, LocalDate.now());
+        populaTabelaLancamentos(c, LocalDate.now());
         
-        card1.setData(new ModelCard("SALDO EM CONTA", "R$900,00", "Increased by 60%"));
-        card2.setData(new ModelCard("DESPESAS TOTAIS", "R$2100,00", "Increased by 25%"));
-        card3.setData(new ModelCard("RECEITAS TOTAIS", "R$3000,00", "Increased by 70%"));
         //  add row table
         spTable.setVerticalScrollBar(new ScrollBar());
         spTable.getVerticalScrollBar().setBackground(Color.WHITE);
@@ -25,22 +40,83 @@ public class Homepage extends javax.swing.JPanel {
         JPanel p = new JPanel();
         p.setBackground(Color.WHITE);
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
-//        table.addRow(new Object[]{"Mike Bhand", "mikebhand@gmail.com", "Admin", "25 Apr,2018", TipoStatus.PENDING});
-//        table.addRow(new Object[]{"Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018", TipoStatus.APPROVED});
-//        table.addRow(new Object[]{"Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018", TipoStatus.APPROVED});
-//        table.addRow(new Object[]{"Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018", TipoStatus.REJECT});
-//        table.addRow(new Object[]{"Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018", TipoStatus.PENDING});
-//        table.addRow(new Object[]{"Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018", TipoStatus.APPROVED});
-//        table.addRow(new Object[]{"Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018", TipoStatus.APPROVED});
-//        table.addRow(new Object[]{"Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018", TipoStatus.REJECT});
-//        table.addRow(new Object[]{"Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018", TipoStatus.PENDING});
-//        table.addRow(new Object[]{"Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018", TipoStatus.PENDING});
-//        table.addRow(new Object[]{"Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018", TipoStatus.APPROVED});
-//        table.addRow(new Object[]{"Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018", TipoStatus.APPROVED});
-//        table.addRow(new Object[]{"Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018", TipoStatus.REJECT});
-//        table.addRow(new Object[]{"Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018", TipoStatus.PENDING});
+        
     }
 
+    public void populaCards(Conta c, LocalDate dt) {
+       
+        double totalDespesas = 0;
+        double totalReceitas = 0;
+        
+        ArrayList<Despesa> despesasList = c.getDespesas();
+        ArrayList<Receita> receitasList = c.getReceitas();
+        
+        for (Receita r : receitasList) {
+            if (r.getData().isBefore(dt) || r.getData().isEqual(dt))
+            totalReceitas = totalReceitas + r.getValor();
+        }
+        
+        for (Despesa r : despesasList) {
+            if (r.getData().isBefore(dt) || r.getData().isEqual(dt))
+            totalDespesas = totalDespesas + r.getValor();
+        }
+           
+        card1.setData(new ModelCard("SALDO EM CONTA", "R$" + String.valueOf(df.format(c.getSaldo())), "Ver todos os lançamentos"));
+        card2.setData(new ModelCard("DESPESAS TOTAIS", "R$" + df.format(totalDespesas), "Ver todas as despesas"));
+        card3.setData(new ModelCard("RECEITAS TOTAIS", "R$" + df.format(totalReceitas), "Ver todas as receitas"));
+        
+    }
+    
+    public void populaTabelaLancamentos(Conta c, LocalDate dt){
+        ArrayList<Lancamento> lancamentosList = c.getLancamentos();;
+       
+        for (Lancamento l : lancamentosList) {
+            if (l.getData().isBefore(dt) || l.getData().isEqual(dt))
+            table.addRow(new Object[]{l.getNome(), l.getData().toString(), String.valueOf(df.format(l.getValor())), l.getCategoria()});
+        }
+    }
+    
+    public void populaTabelaDespesas(Conta c, LocalDate dt){
+        ArrayList<Despesa> despesasList = c.getDespesas();;
+       
+        for (Despesa d : despesasList) {
+            if (d.getData().isBefore(dt) || d.getData().isEqual(dt))
+            table.addRow(new Object[]{d.getNome(), d.getData().toString(), String.valueOf(df.format(d.getValor())), d.getCategoria()});
+          
+        }
+        
+    }
+    
+    public void populaTabelaReceitas(Conta c, LocalDate dt){
+        ArrayList<Receita> receitaList = c.getReceitas();;
+       
+        for (Receita r : receitaList) {
+            if (r.getData().isBefore(dt) || r.getData().isEqual(dt))
+            table.addRow(new Object[]{r.getNome(), r.getData().toString(), String.valueOf(df.format(r.getValor())), r.getCategoria()});
+          
+        }
+        
+    }
+
+    public void importaDados(Conta c) {
+        Importador importador = new Importador(c);
+        
+        String pathDespesasCSV = new File("res/despesas.csv").getAbsolutePath();
+        String pathReceitasCSV = new File("res/receitas.csv").getAbsolutePath();
+        
+        File arquivoDespesas = new File(pathDespesasCSV);
+        File arquivoReceitas = new File(pathReceitasCSV);
+        
+        try {
+            importador.carregarArquivoDespesas(arquivoDespesas);
+            importador.carregarArquivoReceitas(arquivoReceitas);
+        }catch(FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+     
+    
+     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -59,29 +135,46 @@ public class Homepage extends javax.swing.JPanel {
 
         card1.setColor1(new java.awt.Color(33, 147, 176));
         card1.setColor2(new java.awt.Color(109, 213, 237));
+        card1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                card1MouseClicked(evt);
+            }
+        });
         cardContainerPanel.add(card1);
 
-        card2.setColor1(new java.awt.Color(118, 184, 82));
-        card2.setColor2(new java.awt.Color(141, 194, 111));
+        card2.setColor1(new java.awt.Color(244, 107, 69));
+        card2.setColor2(new java.awt.Color(246, 148, 121));
+        card2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                card2MouseClicked(evt);
+            }
+        });
         cardContainerPanel.add(card2);
 
-        card3.setColor1(new java.awt.Color(244, 107, 69));
-        card3.setColor2(new java.awt.Color(246, 148, 121));
+        card3.setColor1(new java.awt.Color(98, 160, 65));
+        card3.setColor2(new java.awt.Color(141, 194, 111));
+        card3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                card3MouseClicked(evt);
+            }
+        });
+        card3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                card3KeyPressed(evt);
+            }
+        });
         cardContainerPanel.add(card3);
 
         tableContainerPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         spTable.setBorder(null);
 
+        table.setAutoCreateRowSorter(true);
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nome", "Data", "Valor", "Categoria"
             }
         ));
         spTable.setViewportView(table);
@@ -125,6 +218,30 @@ public class Homepage extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void card1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_card1MouseClicked
+        
+        clearTableRows();
+        populaTabelaLancamentos(c, LocalDate.now());
+    }//GEN-LAST:event_card1MouseClicked
+
+    private void card2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_card2MouseClicked
+        clearTableRows();
+        populaTabelaDespesas(c, LocalDate.now());
+    }//GEN-LAST:event_card2MouseClicked
+
+    private void card3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_card3KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_card3KeyPressed
+
+    private void card3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_card3MouseClicked
+        clearTableRows();
+        populaTabelaReceitas(c, LocalDate.now());
+    }//GEN-LAST:event_card3MouseClicked
+
+    private void clearTableRows() {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.component.Card card1;
