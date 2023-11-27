@@ -16,13 +16,14 @@ import model.Despesa;
 import model.Importador;
 import model.Lancamento;
 import model.Receita;
+import view.app.CadastroLancamento;
 
-public class Homepage extends javax.swing.JPanel {
+public class HomepageForm extends javax.swing.JPanel {
     
     Conta c = new Conta();
     DecimalFormat df = new DecimalFormat("0.00"); 
     
-    public Homepage() {
+    public HomepageForm() {
         importaDados(c);
         initComponents();
         setOpaque(false);
@@ -114,6 +115,8 @@ public class Homepage extends javax.swing.JPanel {
      
     public void actionButton(){
         System.out.println("Action Button");
+        new CadastroLancamento().setVisible(true);
+        
     }
      
     @SuppressWarnings("unchecked")

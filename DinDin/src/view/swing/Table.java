@@ -19,9 +19,9 @@ public class Table extends JTable {
             @Override
             public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
                 TableHeader header = new TableHeader(o + "");
-                if (i1 == 3) {
+//                if (i1 == 3) {
                     header.setHorizontalAlignment(JLabel.CENTER);
-                }
+//                }
                 return header;
             }
         });
@@ -31,9 +31,10 @@ public class Table extends JTable {
                 if (i1 != 4) {
                     Component com = super.getTableCellRendererComponent(jtable, o, selected, bln1, i, i1);
                     com.setBackground(Color.WHITE);
+                    setHorizontalAlignment(JLabel.CENTER);
                     setBorder(noFocusBorder);
                     if (selected) {
-                        com.setForeground(new Color(15, 89, 140));
+                        com.setForeground(new Color(102, 102, 102));
                     } else {
                         com.setForeground(new Color(102, 102, 102));
                     }

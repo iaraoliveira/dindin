@@ -1,52 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package view.app;
 
-import view.form.Homepage;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLayer;
-import model.Conta;
-import model.Importador;
-import view.component.FloatingButton;
+import view.form.HomepageForm;
+import view.swing.FloatingButton;
 
-/**
- *
- * @author RAVEN
- */
-public class App extends javax.swing.JFrame {
+public class Main extends javax.swing.JFrame {
+
+    private HomepageForm home;
     
-    /**
-     * Creates new form Main
-     */
-    private Homepage home;
-
-    public App() {
+    public Main() {
         initComponents();
+        init();
+    }
+    
+    private void init(){
+        home = new HomepageForm();
+        
         setBackground(new Color(0, 0, 0, 0));
-        home = new Homepage();
         
         mainPanel.add(new JLayer(home, new FloatingButton()));
-        initMoving(this);
         
-        //  set when system open start with home form
-//        setForm(home);
-    }
-
-    private void setForm(JComponent com) {
-        mainPanel.removeAll();
-        mainPanel.add(com);
-        mainPanel.repaint();
-        mainPanel.revalidate();
+        initMoving(this);
     }
 
     /**
@@ -63,7 +43,6 @@ public class App extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(242, 242, 242));
         setUndecorated(true);
 
         panelBorder.setBackground(new java.awt.Color(242, 242, 242));
@@ -121,28 +100,25 @@ public class App extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
-                new App().setVisible(true);
+                new Main().setVisible(true);
             }
         });
     }
-    
+
+        
     private int x;
     private int y;
 
@@ -160,8 +136,8 @@ public class App extends javax.swing.JFrame {
                 f.setLocation(e.getXOnScreen()-x,e.getYOnScreen()-y);
             }
         });
-        
     }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.component.Header header;

@@ -1,5 +1,5 @@
 
-package view.component;
+package view.swing;
 
 import java.awt.AWTEvent;
 import java.awt.Color;
@@ -19,10 +19,10 @@ import javax.swing.JComponent;
 import javax.swing.JLayer;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.LayerUI;
-import view.form.Homepage;
+import view.form.HomepageForm;
 
 
-public class FloatingButton extends LayerUI<Homepage> {
+public class FloatingButton extends LayerUI<HomepageForm> {
 
     private Shape shape;
     private boolean mousePressed;
@@ -82,7 +82,7 @@ public class FloatingButton extends LayerUI<Homepage> {
     }
 
     @Override
-    protected void processMouseEvent(MouseEvent e, JLayer<? extends Homepage> l) {
+    protected void processMouseEvent(MouseEvent e, JLayer<? extends HomepageForm> l) {
         if(mouseHovered){
             e.consume();
         }
@@ -97,7 +97,7 @@ public class FloatingButton extends LayerUI<Homepage> {
                 mousePressed = false;
                 l.repaint(shape.getBounds());
                 if(mouseHovered){
-                    Homepage home = l.getView();
+                    HomepageForm home = l.getView();
                     home.actionButton();
                 }
 
@@ -107,7 +107,7 @@ public class FloatingButton extends LayerUI<Homepage> {
     }
 
     @Override
-    protected void processMouseMotionEvent(MouseEvent e, JLayer<? extends Homepage> l) {
+    protected void processMouseMotionEvent(MouseEvent e, JLayer<? extends HomepageForm> l) {
         Point point = SwingUtilities.convertPoint(e.getComponent(), e.getPoint(),l.getView());
         boolean hover = shape.contains(point);
         
