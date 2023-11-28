@@ -1,25 +1,60 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package view.form;
 
 import java.awt.Color;
+import java.awt.List;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
+import javax.swing.text.MaskFormatter;
+import model.Conta;
+import model.Despesa;
+import model.Receita;
+import model.enums.CategoriaDespesa;
+import model.enums.CategoriaReceita;
 
-/**
- *
- * @author iara9
- */
+
 public class CadastroForm extends javax.swing.JPanel {
 
-    /**
-     * Creates new form CreateLancamento
-     */
+    String[] catDespesaOptions;
+    String[] catReceitaOptions;
+    
+    Conta c;
+    
     public CadastroForm() {
         initComponents();
+        init();
+    }
+    
+    public CadastroForm(Conta conta) {
+        c = conta;
+        initComponents();
+        init();
     }
 
+    private void init(){
+        catDespesaOptions = getOptionValues(CategoriaDespesa.values());
+        catReceitaOptions = getOptionValues(CategoriaReceita.values());
+    }
+    
+    private static <T extends Enum<T>> String[] getOptionValues(T[] values) {
+        String[] optionList = new String[values.length];        
+
+
+        int i = 0;
+        for (T value : values) {
+            optionList[i] = value.toString();
+            i++;
+        }
+        
+        return optionList;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,15 +68,17 @@ public class CadastroForm extends javax.swing.JPanel {
         lblTitle = new javax.swing.JLabel();
         lblSubtitle = new javax.swing.JLabel();
         lblDescricao = new javax.swing.JLabel();
-        txtDescricao = new javax.swing.JTextField();
-        txtValor = new javax.swing.JTextField();
+        txtData = new javax.swing.JTextField();
         lblValor = new javax.swing.JLabel();
         lblTipoLancamento = new javax.swing.JLabel();
         lblCategoria = new javax.swing.JLabel();
         rbTipoDespesa = new javax.swing.JRadioButton();
         rbTipoReceita = new javax.swing.JRadioButton();
         cbCategoria = new javax.swing.JComboBox<>();
-        button1 = new view.swing.Button();
+        button1 = new view.component.Button();
+        lblData = new javax.swing.JLabel();
+        txtDescricao = new javax.swing.JTextField();
+        txtValor = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setFont(new java.awt.Font("Yu Gothic UI Light", 0, 12)); // NOI18N
@@ -61,20 +98,17 @@ public class CadastroForm extends javax.swing.JPanel {
         lblDescricao.setForeground(new java.awt.Color(51, 51, 51));
         lblDescricao.setText("Descrição");
 
-        txtDescricao.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
-        txtDescricao.setToolTipText("");
-        txtDescricao.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        txtDescricao.addActionListener(new java.awt.event.ActionListener() {
+        txtData.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
+        txtData.setToolTipText("");
+        txtData.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        txtData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescricaoActionPerformed(evt);
+                txtDataActionPerformed(evt);
             }
         });
-
-        txtValor.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
-        txtValor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        txtValor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtValorActionPerformed(evt);
+        txtData.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDataKeyTyped(evt);
             }
         });
 
@@ -90,15 +124,31 @@ public class CadastroForm extends javax.swing.JPanel {
         lblCategoria.setForeground(new java.awt.Color(51, 51, 51));
         lblCategoria.setText("Categoria");
 
+        rbTipoDespesa.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroupTipoLancamento.add(rbTipoDespesa);
         rbTipoDespesa.setText("Despesa");
+        rbTipoDespesa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rbTipoDespesaMouseClicked(evt);
+            }
+        });
+        rbTipoDespesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbTipoDespesaActionPerformed(evt);
+            }
+        });
 
+        rbTipoReceita.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroupTipoLancamento.add(rbTipoReceita);
         rbTipoReceita.setText("Receita");
         rbTipoReceita.setToolTipText("");
+        rbTipoReceita.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rbTipoReceitaMouseClicked(evt);
+            }
+        });
 
         cbCategoria.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
-        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbCategoria.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         cbCategoria.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         cbCategoria.addActionListener(new java.awt.event.ActionListener() {
@@ -111,6 +161,33 @@ public class CadastroForm extends javax.swing.JPanel {
         button1.setForeground(new java.awt.Color(255, 255, 255));
         button1.setText("Cadastrar");
         button1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
+
+        lblData.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 12)); // NOI18N
+        lblData.setForeground(new java.awt.Color(51, 51, 51));
+        lblData.setText("Data");
+
+        txtDescricao.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
+        txtDescricao.setToolTipText("");
+        txtDescricao.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        txtDescricao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescricaoActionPerformed(evt);
+            }
+        });
+
+        txtValor.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
+        txtValor.setToolTipText("");
+        txtValor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        txtValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtValorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -118,25 +195,26 @@ public class CadastroForm extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtValor, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
-                    .addComponent(txtDescricao)
-                    .addComponent(cbCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(rbTipoDespesa)
-                        .addGap(18, 18, 18)
-                        .addComponent(rbTipoReceita))
-                    .addComponent(lblCategoria)
-                    .addComponent(lblTipoLancamento)
-                    .addComponent(lblValor)
-                    .addComponent(lblDescricao)
-                    .addComponent(lblSubtitle)
-                    .addComponent(lblTitle))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblData)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbCategoria, 0, 568, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(rbTipoDespesa)
+                                .addGap(18, 18, 18)
+                                .addComponent(rbTipoReceita))
+                            .addComponent(lblCategoria)
+                            .addComponent(lblTipoLancamento)
+                            .addComponent(lblValor)
+                            .addComponent(lblDescricao)
+                            .addComponent(lblSubtitle)
+                            .addComponent(lblTitle)
+                            .addComponent(txtDescricao)
+                            .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtValor))))
                 .addContainerGap(25, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,15 +223,15 @@ public class CadastroForm extends javax.swing.JPanel {
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSubtitle)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addComponent(lblDescricao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblValor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTipoLancamento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -163,11 +241,36 @@ public class CadastroForm extends javax.swing.JPanel {
                 .addComponent(lblCategoria)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(4, 4, 4)
+                .addComponent(lblData)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDataActionPerformed
+
+    private void cbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCategoriaActionPerformed
+
+    private void rbTipoDespesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbTipoDespesaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbTipoDespesaActionPerformed
+
+    private void rbTipoDespesaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbTipoDespesaMouseClicked
+//        DefaultComboBoxModel<String> newModel = new DefaultComboBoxModel<>(CategoriaDespesa.values());
+        cbCategoria.setModel(new DefaultComboBoxModel<>(catDespesaOptions));
+    }//GEN-LAST:event_rbTipoDespesaMouseClicked
+
+    private void rbTipoReceitaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbTipoReceitaMouseClicked
+        cbCategoria.setModel(new DefaultComboBoxModel<>(catReceitaOptions));
+    }//GEN-LAST:event_rbTipoReceitaMouseClicked
 
     private void txtDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescricaoActionPerformed
         // TODO add your handling code here:
@@ -177,15 +280,38 @@ public class CadastroForm extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtValorActionPerformed
 
-    private void cbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCategoriaActionPerformed
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");;
+//        DecimalFormat df = new DecimalFormat("0.00");
+                
+        String nome = txtDescricao.getText();
+        LocalDate data = LocalDate.parse(txtData.getText());
+        double valor = Double.parseDouble(txtValor.getText());
+        String categoria = cbCategoria.getSelectedItem().toString();
+        
+        System.out.println(txtData.getText());
+        System.out.println(txtValor.getText());
+        
+        if(rbTipoDespesa.isSelected()){
+            Despesa d = new Despesa(nome, data , valor, CategoriaDespesa.findByDescricao(categoria));;
+            c.incluirDespesa(d);;
+        } else if(rbTipoReceita.isSelected()){
+            Receita r = new Receita(nome, data , valor, CategoriaReceita.findByDescricao(categoria));
+            c.incluirReceita(r);
+        };
+        
+    }//GEN-LAST:event_button1ActionPerformed
+
+    private void txtDataKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbCategoriaActionPerformed
+    }//GEN-LAST:event_txtDataKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.swing.Button button1;
+    private view.component.Button button1;
     private javax.swing.JComboBox<String> cbCategoria;
     private javax.swing.JLabel lblCategoria;
+    private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblDescricao;
     private javax.swing.JLabel lblSubtitle;
     private javax.swing.JLabel lblTipoLancamento;
@@ -193,6 +319,7 @@ public class CadastroForm extends javax.swing.JPanel {
     private javax.swing.JLabel lblValor;
     private javax.swing.JRadioButton rbTipoDespesa;
     private javax.swing.JRadioButton rbTipoReceita;
+    private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables

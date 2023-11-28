@@ -24,7 +24,7 @@ public enum CategoriaReceita {
     
     static {
         for (CategoriaReceita c : CategoriaReceita.values()) {
-            categorias.put(c.getDescricao(), c);
+            categorias.put(c.toString(), c);
         }
     }
     
@@ -32,11 +32,16 @@ public enum CategoriaReceita {
     private CategoriaReceita(String descricao) {
         this.descricao = descricao;
     }
-
-    public String getDescricao() {
+    
+    /**
+     * Retorna a descrição da categoria
+     * @return descrição
+     */
+    @Override
+    public String toString() {
         return descricao;
     }
-
+    
     /**
      * Busca o enum com descrição correspodente à String passada por parâmetro
      * @param descricao

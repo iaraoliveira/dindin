@@ -1,13 +1,17 @@
 package view.form;
 
 import view.model.ModelCard;
-import view.swing.ScrollBar;
+import view.component.ScrollBar;
 import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
@@ -22,10 +26,14 @@ public class HomepageForm extends javax.swing.JPanel {
     
     Conta c = new Conta();
     DecimalFormat df = new DecimalFormat("0.00"); 
+    Locale locale = new Locale("pt", "BR");
+    NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/YYYY"); 
     
     public HomepageForm() {
         importaDados(c);
         initComponents();
+        init();
         setOpaque(false);
                 
         populaCards(c, LocalDate.now());
@@ -40,6 +48,11 @@ public class HomepageForm extends javax.swing.JPanel {
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
         
     }
+    
+    public void init() {
+
+    }
+    
 
     public void populaCards(Conta c, LocalDate dt) {
        
@@ -59,9 +72,9 @@ public class HomepageForm extends javax.swing.JPanel {
             totalDespesas = totalDespesas + r.getValor();
         }
            
-        card1.setData(new ModelCard("SALDO EM CONTA", "R$" + String.valueOf(df.format(c.getSaldo())), "Ver todos os lançamentos"));
-        card2.setData(new ModelCard("DESPESAS TOTAIS", "R$" + df.format(totalDespesas), "Ver todas as despesas"));
-        card3.setData(new ModelCard("RECEITAS TOTAIS", "R$" + df.format(totalReceitas), "Ver todas as receitas"));
+        card1.setData(new ModelCard("SALDO EM CONTA", currencyFormatter.format(c.getSaldo()), "Ver todos os lançamentos"));
+        card2.setData(new ModelCard("DESPESAS TOTAIS", currencyFormatter.format(totalDespesas), "Ver todas as despesas"));
+        card3.setData(new ModelCard("RECEITAS TOTAIS", currencyFormatter.format(totalReceitas), "Ver todas as receitas"));
         
     }
     
@@ -70,7 +83,7 @@ public class HomepageForm extends javax.swing.JPanel {
        
         for (Lancamento l : lancamentosList) {
             if (l.getData().isBefore(dt) || l.getData().isEqual(dt))
-            table.addRow(new Object[]{l.getNome(), l.getData().toString(), String.valueOf(df.format(l.getValor())), l.getCategoria()});
+            table.addRow(new Object[]{l.getNome(), dateFormatter.format(l.getData()), currencyFormatter.format(l.getValor()), l.getCategoria()});
         }
     }
     
@@ -79,7 +92,7 @@ public class HomepageForm extends javax.swing.JPanel {
        
         for (Despesa d : despesasList) {
             if (d.getData().isBefore(dt) || d.getData().isEqual(dt))
-            table.addRow(new Object[]{d.getNome(), d.getData().toString(), String.valueOf(df.format(d.getValor())), d.getCategoria()});
+            table.addRow(new Object[]{d.getNome(), dateFormatter.format(d.getData()),currencyFormatter.format(d.getValor()), d.getCategoria()});
           
         }
         
@@ -90,7 +103,7 @@ public class HomepageForm extends javax.swing.JPanel {
        
         for (Receita r : receitaList) {
             if (r.getData().isBefore(dt) || r.getData().isEqual(dt))
-            table.addRow(new Object[]{r.getNome(), r.getData().toString(), String.valueOf(df.format(r.getValor())), r.getCategoria()});
+            table.addRow(new Object[]{r.getNome(), dateFormatter.format(r.getData()), currencyFormatter.format(r.getValor()), r.getCategoria()});
           
         }
         
@@ -115,7 +128,7 @@ public class HomepageForm extends javax.swing.JPanel {
      
     public void actionButton(){
         System.out.println("Action Button");
-        new CadastroLancamento().setVisible(true);
+        new CadastroLancamento(c).setVisible(true);
         
     }
      
@@ -127,9 +140,9 @@ public class HomepageForm extends javax.swing.JPanel {
         card1 = new view.component.Card();
         card2 = new view.component.Card();
         card3 = new view.component.Card();
-        tableContainerPanel = new view.swing.PanelBorder();
+        tableContainerPanel = new view.component.PanelBorder();
         spTable = new javax.swing.JScrollPane();
-        table = new view.swing.Table();
+        table = new view.component.Table();
 
         setBackground(new java.awt.Color(242, 242, 242));
 
@@ -172,6 +185,7 @@ public class HomepageForm extends javax.swing.JPanel {
         spTable.setBorder(null);
 
         table.setAutoCreateRowSorter(true);
+        table.setBackground(new java.awt.Color(255, 255, 255));
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
             },
@@ -194,7 +208,7 @@ public class HomepageForm extends javax.swing.JPanel {
             tableContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tableContainerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(spTable, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(spTable, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -216,7 +230,7 @@ public class HomepageForm extends javax.swing.JPanel {
                 .addComponent(cardContainerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(tableContainerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addGap(25, 25, 25))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -250,7 +264,7 @@ public class HomepageForm extends javax.swing.JPanel {
     private view.component.Card card3;
     private javax.swing.JLayeredPane cardContainerPanel;
     private javax.swing.JScrollPane spTable;
-    private view.swing.Table table;
-    private view.swing.PanelBorder tableContainerPanel;
+    private view.component.Table table;
+    private view.component.PanelBorder tableContainerPanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -16,7 +16,7 @@ public class Despesa extends Lancamento {
     private CategoriaDespesa categoria;
     
     public Despesa(String nome, LocalDate data, double valor, CategoriaDespesa categoria) {
-        super(nome, data, valor, categoria.getDescricao());
+        super(nome, data, valor, categoria.toString());
     }
     
 }

@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.time.LocalDate;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import model.Conta;
@@ -14,10 +15,16 @@ public class Header extends javax.swing.JPanel {
 
     public Header() {
         initComponents();
+        init();
         setOpaque(false);
         lblIcon.setIcon(getResizedImage());
     }
 
+    public void init() {
+        LocalDate now = LocalDate.now();
+        searchText1.setText(now.toString());
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -25,7 +32,7 @@ public class Header extends javax.swing.JPanel {
         lblIcon = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
         lblSubtitle = new javax.swing.JLabel();
-        searchText1 = new view.swing.SearchText();
+        searchText1 = new view.component.SearchText();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setOpaque(false);
@@ -113,6 +120,6 @@ public class Header extends javax.swing.JPanel {
     private javax.swing.JLabel lblIcon;
     private javax.swing.JLabel lblSubtitle;
     private javax.swing.JLabel lblTitle;
-    private view.swing.SearchText searchText1;
+    private view.component.SearchText searchText1;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,12 +9,12 @@ import javax.swing.JFrame;
 import javax.swing.JLayer;
 import view.form.CadastroForm;
 import view.form.HomepageForm;
-import view.swing.FloatingButton;
+import view.component.FloatingButton;
 
 public class App extends javax.swing.JFrame {
 
-    private HomepageForm home;
-    private CadastroForm cadastro;    
+    
+    private HomepageForm home;   
     
     public App() {
         initComponents();
@@ -24,7 +24,6 @@ public class App extends javax.swing.JFrame {
     private void init(){
                 
         home = new HomepageForm();
-        cadastro = new CadastroForm();
         
         setBackground(new Color(0, 0, 0, 0));
         
@@ -43,17 +42,16 @@ public class App extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        contentContainer = new javax.swing.JLayeredPane();
-        panelBorder = new view.swing.PanelBorder();
-        header = new view.component.Header();
+        panelBorder = new view.component.PanelBorder();
         mainPanel = new javax.swing.JPanel();
+        header = new view.component.Header();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        contentContainer.setPreferredSize(new java.awt.Dimension(791, 669));
-
         panelBorder.setBackground(new java.awt.Color(242, 242, 242));
+        panelBorder.setMaximumSize(new java.awt.Dimension(791, 624));
+        panelBorder.setMinimumSize(new java.awt.Dimension(791, 624));
 
         mainPanel.setOpaque(false);
         mainPanel.setLayout(new java.awt.BorderLayout());
@@ -62,56 +60,27 @@ public class App extends javax.swing.JFrame {
         panelBorder.setLayout(panelBorderLayout);
         panelBorderLayout.setHorizontalGroup(
             panelBorderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(header, javax.swing.GroupLayout.DEFAULT_SIZE, 779, Short.MAX_VALUE)
+            .addComponent(header, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panelBorderLayout.setVerticalGroup(
             panelBorderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorderLayout.createSequentialGroup()
                 .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
-        );
-
-        contentContainer.setLayer(panelBorder, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout contentContainerLayout = new javax.swing.GroupLayout(contentContainer);
-        contentContainer.setLayout(contentContainerLayout);
-        contentContainerLayout.setHorizontalGroup(
-            contentContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 791, Short.MAX_VALUE)
-            .addGroup(contentContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(contentContainerLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(panelBorder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-        contentContainerLayout.setVerticalGroup(
-            contentContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 669, Short.MAX_VALUE)
-            .addGroup(contentContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(contentContainerLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(panelBorder, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(contentContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panelBorder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(contentContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panelBorder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -141,9 +110,8 @@ public class App extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLayeredPane contentContainer;
     private view.component.Header header;
     private javax.swing.JPanel mainPanel;
-    private view.swing.PanelBorder panelBorder;
+    private view.component.PanelBorder panelBorder;
     // End of variables declaration//GEN-END:variables
 }

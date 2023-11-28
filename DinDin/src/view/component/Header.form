@@ -90,7 +90,7 @@
         <Property name="text" type="java.lang.String" value="Aqui est&#xe1; um resumo das suas movimenta&#xe7;&#xf5;es at&#xe9; o dia de hoje"/>
       </Properties>
     </Component>
-    <Component class="view.swing.SearchText" name="searchText1">
+    <Component class="view.component.SearchText" name="searchText1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>

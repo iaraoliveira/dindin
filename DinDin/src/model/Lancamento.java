@@ -1,15 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
+
 package model;
 
 import java.time.LocalDate;
 
-/**
- *
- * @author iara9
- */
+
 public class Lancamento {
     private String nome;
     private LocalDate data;

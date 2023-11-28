@@ -6,15 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import model.enums.CategoriaDespesa;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 
-/**
- *
- * @author iara9
- */
 public class Conta {
     private double saldo;
 
@@ -30,7 +22,7 @@ public class Conta {
         lancamentos = new ArrayList<>();
     }
     
-      /**
+     /**
      * Inclui nova despesa e faz decremento no valor do saldo caso a data da despesa já tenha passado
      * @param despesa 
      */
@@ -53,7 +45,6 @@ public class Conta {
     public void incluirReceita(Receita r){
         receitas.add(r);
         lancamentos.add(r);
-
         
         // incrementa saldo da conta
         LocalDate today = LocalDate.now();
@@ -61,6 +52,8 @@ public class Conta {
             double s = saldo + r.getValor();
             setSaldo(s);
         }
+        
+        System.out.println(r);
     }
 
     /**

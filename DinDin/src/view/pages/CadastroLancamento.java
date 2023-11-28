@@ -5,6 +5,9 @@
 package view.pages;
 
 import java.awt.Color;
+import java.awt.HeadlessException;
+import model.Conta;
+import view.component.PanelBorder;
 
 /**
  *
@@ -12,14 +15,24 @@ import java.awt.Color;
  */
 public class CadastroLancamento extends javax.swing.JFrame {
 
+    Conta c;
+    
     /**
      * Creates new form CadastroLancamento
      */
     public CadastroLancamento() {
+       
         initComponents();
-        
         setBackground(new Color(0, 0, 0, 0));
     }
+
+    public CadastroLancamento(Conta c) {
+    
+        initComponents();
+        setBackground(new Color(0, 0, 0, 0));
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,8 +43,8 @@ public class CadastroLancamento extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bg = new view.swing.PanelBorder();
-        panelBorder = new view.swing.PanelBorder();
+        bg = new view.component.PanelBorder();
+        panelBorder = new view.component.PanelBorder();
         cadastroForm1 = new view.form.CadastroForm();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -58,7 +71,7 @@ public class CadastroLancamento extends javax.swing.JFrame {
         );
         panelBorderLayout.setVerticalGroup(
             panelBorderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
+            .addGap(0, 478, Short.MAX_VALUE)
             .addGroup(panelBorderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorderLayout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -139,8 +152,8 @@ public class CadastroLancamento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.swing.PanelBorder bg;
+    private view.component.PanelBorder bg;
     private view.form.CadastroForm cadastroForm1;
-    private view.swing.PanelBorder panelBorder;
+    private view.component.PanelBorder panelBorder;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,4 +1,4 @@
-package view.swing;
+package view.component;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;

@@ -7,10 +7,7 @@ package model.enums;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- *
- * @author iara9
- */
+
 public enum CategoriaDespesa {
     ALIMENTACAO("Alimentação"),
     TRANSPORTE("Transporte"),
@@ -27,7 +24,7 @@ public enum CategoriaDespesa {
     
     static {
         for (CategoriaDespesa c : CategoriaDespesa.values()) {
-            categorias.put(c.getDescricao(), c);
+            categorias.put(c.toString(), c);
         }
     }
     
@@ -39,7 +36,8 @@ public enum CategoriaDespesa {
      * Retorna a descrição da categoria
      * @return descrição
      */
-    public String getDescricao() {
+    @Override
+    public String toString() {
         return descricao;
     }
     

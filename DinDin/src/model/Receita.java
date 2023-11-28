@@ -16,7 +16,7 @@ public class Receita extends Lancamento{
     private CategoriaReceita categoria;
 
     public Receita(String nome, LocalDate data, double valor, CategoriaReceita categoria) {
-        super(nome, data, valor, categoria.getDescricao());
+        super(nome, data, valor, categoria.toString());
     }  
     
 }
