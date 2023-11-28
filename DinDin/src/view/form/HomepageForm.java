@@ -16,7 +16,7 @@ import model.Despesa;
 import model.Importador;
 import model.Lancamento;
 import model.Receita;
-import view.app.CadastroLancamento;
+import view.pages.CadastroLancamento;
 
 public class HomepageForm extends javax.swing.JPanel {
     
@@ -216,7 +216,7 @@ public class HomepageForm extends javax.swing.JPanel {
                 .addComponent(cardContainerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(tableContainerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addGap(30, 30, 30))
         );
     }// </editor-fold>//GEN-END:initComponents
 
