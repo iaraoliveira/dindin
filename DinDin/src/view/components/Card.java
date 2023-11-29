@@ -1,4 +1,4 @@
-package view.component;
+package view.components;
 
 import view.model.ModelCard;
 import java.awt.Color;

@@ -1,5 +1,5 @@
 
-package view.component;
+package view.components;
 
 import java.awt.AWTEvent;
 import java.awt.Color;
@@ -19,10 +19,10 @@ import javax.swing.JComponent;
 import javax.swing.JLayer;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.LayerUI;
-import view.form.HomepageForm;
+import view.pages.HomepageContent;
 
 
-public class FloatingButton extends LayerUI<HomepageForm> {
+public class FloatingButton extends LayerUI<HomepageContent> {
 
     private Shape shape;
     private boolean mousePressed;
@@ -82,7 +82,7 @@ public class FloatingButton extends LayerUI<HomepageForm> {
     }
 
     @Override
-    protected void processMouseEvent(MouseEvent e, JLayer<? extends HomepageForm> l) {
+    protected void processMouseEvent(MouseEvent e, JLayer<? extends HomepageContent> l) {
         if(mouseHovered){
             e.consume();
         }
@@ -97,7 +97,7 @@ public class FloatingButton extends LayerUI<HomepageForm> {
                 mousePressed = false;
                 l.repaint(shape.getBounds());
                 if(mouseHovered){
-                    HomepageForm home = l.getView();
+                    HomepageContent home = l.getView();
                     home.actionButton();
                 }
 
@@ -107,7 +107,7 @@ public class FloatingButton extends LayerUI<HomepageForm> {
     }
 
     @Override
-    protected void processMouseMotionEvent(MouseEvent e, JLayer<? extends HomepageForm> l) {
+    protected void processMouseMotionEvent(MouseEvent e, JLayer<? extends HomepageContent> l) {
         Point point = SwingUtilities.convertPoint(e.getComponent(), e.getPoint(),l.getView());
         boolean hover = shape.contains(point);
         
@@ -127,22 +127,7 @@ public class FloatingButton extends LayerUI<HomepageForm> {
         int height = size + shadowSize * 2;
         imageShadow = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = imageShadow.createGraphics();
-//        g2.drawImage(new ShadowRenderer(), xform, obs)
         g2.dispose();
     }
-    
-//    private BufferedImage createShape(int size){
-//        BufferedImage img = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
-//        Graphics2D g2 = img.createGraphics();
-//        g2.fill(new Ellipse2D.Double(0,0, size, size));
-//        
-//        g2.dispose();
-//        return img;
-//    }
-    
-    
-    
-    
-    
-    
+
 }

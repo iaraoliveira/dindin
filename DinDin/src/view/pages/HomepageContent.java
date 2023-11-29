@@ -1,13 +1,14 @@
-package view.form;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ */
+package view.pages;
 
-import view.model.ModelCard;
-import view.component.ScrollBar;
 import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -20,40 +21,62 @@ import model.Despesa;
 import model.Importador;
 import model.Lancamento;
 import model.Receita;
-import view.pages.CadastroLancamento;
+import view.components.ScrollBar;
+import view.model.ModelCard;
 
-public class HomepageForm extends javax.swing.JPanel {
-    
+/**
+ *
+ * @author iara9
+ */
+public class HomepageContent extends javax.swing.JPanel {
+
     Conta c = new Conta();
     DecimalFormat df = new DecimalFormat("0.00"); 
     Locale locale = new Locale("pt", "BR");
     NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/YYYY"); 
     
-    public HomepageForm() {
-        importaDados(c);
+    public HomepageContent() {
         initComponents();
         init();
         setOpaque(false);
-                
+    }
+
+    public void init() {
+        
+        importaDados(c);
         populaCards(c, LocalDate.now());
         populaTabelaLancamentos(c, LocalDate.now());
-        
+
         //  add row table
         spTable.setVerticalScrollBar(new ScrollBar());
         spTable.getVerticalScrollBar().setBackground(Color.WHITE);
         spTable.getViewport().setBackground(Color.WHITE);
         JPanel p = new JPanel();
+        p.setOpaque(false);
         p.setBackground(Color.WHITE);
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
+                
+    }
+  
+    
+    public void importaDados(Conta c) {
+        Importador importador = new Importador(c);
         
+        String pathDespesasCSV = new File("res/despesas.csv").getAbsolutePath();
+        String pathReceitasCSV = new File("res/receitas.csv").getAbsolutePath();
+        
+        File arquivoDespesas = new File(pathDespesasCSV);
+        File arquivoReceitas = new File(pathReceitasCSV);
+        
+        try {
+            importador.carregarArquivoDespesas(arquivoDespesas);
+            importador.carregarArquivoReceitas(arquivoReceitas);
+        }catch(FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
     
-    public void init() {
-
-    }
-    
-
     public void populaCards(Conta c, LocalDate dt) {
        
         double totalDespesas = 0;
@@ -79,7 +102,7 @@ public class HomepageForm extends javax.swing.JPanel {
     }
     
     public void populaTabelaLancamentos(Conta c, LocalDate dt){
-        ArrayList<Lancamento> lancamentosList = c.getLancamentos();;
+        ArrayList<Lancamento> lancamentosList = c.getLancamentos();
        
         for (Lancamento l : lancamentosList) {
             if (l.getData().isBefore(dt) || l.getData().isEqual(dt))
@@ -88,7 +111,7 @@ public class HomepageForm extends javax.swing.JPanel {
     }
     
     public void populaTabelaDespesas(Conta c, LocalDate dt){
-        ArrayList<Despesa> despesasList = c.getDespesas();;
+        ArrayList<Despesa> despesasList = c.getDespesas();
        
         for (Despesa d : despesasList) {
             if (d.getData().isBefore(dt) || d.getData().isEqual(dt))
@@ -99,7 +122,7 @@ public class HomepageForm extends javax.swing.JPanel {
     }
     
     public void populaTabelaReceitas(Conta c, LocalDate dt){
-        ArrayList<Receita> receitaList = c.getReceitas();;
+        ArrayList<Receita> receitaList = c.getReceitas();
        
         for (Receita r : receitaList) {
             if (r.getData().isBefore(dt) || r.getData().isEqual(dt))
@@ -108,43 +131,41 @@ public class HomepageForm extends javax.swing.JPanel {
         }
         
     }
-
-    public void importaDados(Conta c) {
-        Importador importador = new Importador(c);
-        
-        String pathDespesasCSV = new File("res/despesas.csv").getAbsolutePath();
-        String pathReceitasCSV = new File("res/receitas.csv").getAbsolutePath();
-        
-        File arquivoDespesas = new File(pathDespesasCSV);
-        File arquivoReceitas = new File(pathReceitasCSV);
-        
-        try {
-            importador.carregarArquivoDespesas(arquivoDespesas);
-            importador.carregarArquivoReceitas(arquivoReceitas);
-        }catch(FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-     
+    
     public void actionButton(){
         System.out.println("Action Button");
-        new CadastroLancamento(c).setVisible(true);
+        //TO-DO: open dialog
         
     }
-     
+    private void clearTableRows() {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+    }
+
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         cardContainerPanel = new javax.swing.JLayeredPane();
-        card1 = new view.component.Card();
-        card2 = new view.component.Card();
-        card3 = new view.component.Card();
-        tableContainerPanel = new view.component.PanelBorder();
+        card1 = new view.components.Card();
+        card2 = new view.components.Card();
+        card3 = new view.components.Card();
+        tableContainerPanel = new view.components.PanelBorder();
         spTable = new javax.swing.JScrollPane();
-        table = new view.component.Table();
+        table = new view.components.Table();
+        lblTitle = new javax.swing.JLabel();
+        searchText1 = new view.components.SearchText();
+        lblSubtitle = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(242, 242, 242));
+        setMaximumSize(new java.awt.Dimension(917, 591));
+        setMinimumSize(new java.awt.Dimension(917, 591));
+        setPreferredSize(new java.awt.Dimension(917, 591));
 
         cardContainerPanel.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
 
@@ -212,59 +233,95 @@ public class HomepageForm extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        lblTitle.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 20)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(51, 51, 51));
+        lblTitle.setText("Boa Noite!");
+
+        searchText1.setBackground(new java.awt.Color(255, 255, 255));
+        searchText1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        searchText1.setForeground(new java.awt.Color(51, 51, 51));
+        searchText1.setAutoscrolls(false);
+        searchText1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        searchText1.setRequestFocusEnabled(false);
+        searchText1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchText1ActionPerformed(evt);
+            }
+        });
+
+        lblSubtitle.setFont(new java.awt.Font("Yu Gothic UI", 0, 14)); // NOI18N
+        lblSubtitle.setForeground(new java.awt.Color(102, 102, 102));
+        lblSubtitle.setText("Aqui está um resumo das suas movimentações até o dia de hoje");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tableContainerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cardContainerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE))
-                .addGap(20, 20, 20))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTitle)
+                            .addComponent(lblSubtitle))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 304, Short.MAX_VALUE)
+                        .addComponent(searchText1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tableContainerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cardContainerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(24, 24, 24))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(lblSubtitle))
+                    .addComponent(searchText1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cardContainerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(16, 16, 16)
                 .addComponent(tableContainerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void card1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_card1MouseClicked
-        clearTableRows();
-        populaTabelaLancamentos(c, LocalDate.now());
+
     }//GEN-LAST:event_card1MouseClicked
 
     private void card2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_card2MouseClicked
-        clearTableRows();
-        populaTabelaDespesas(c, LocalDate.now());
+
     }//GEN-LAST:event_card2MouseClicked
+
+    private void card3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_card3MouseClicked
+
+    }//GEN-LAST:event_card3MouseClicked
 
     private void card3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_card3KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_card3KeyPressed
 
-    private void card3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_card3MouseClicked
-        clearTableRows();
-        populaTabelaReceitas(c, LocalDate.now());
-    }//GEN-LAST:event_card3MouseClicked
+    private void searchText1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchText1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchText1ActionPerformed
 
-    private void clearTableRows() {
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.setRowCount(0);
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.component.Card card1;
-    private view.component.Card card2;
-    private view.component.Card card3;
+    private view.components.Card card1;
+    private view.components.Card card2;
+    private view.components.Card card3;
     private javax.swing.JLayeredPane cardContainerPanel;
+    private javax.swing.JLabel lblSubtitle;
+    private javax.swing.JLabel lblTitle;
+    private view.components.SearchText searchText1;
     private javax.swing.JScrollPane spTable;
-    private view.component.Table table;
-    private view.component.PanelBorder tableContainerPanel;
+    private view.components.Table table;
+    private view.components.PanelBorder tableContainerPanel;
     // End of variables declaration//GEN-END:variables
 }

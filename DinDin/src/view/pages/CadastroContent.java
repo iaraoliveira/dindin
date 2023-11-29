@@ -1,5 +1,5 @@
 
-package view.form;
+package view.pages;
 
 import java.awt.Color;
 import java.awt.List;
@@ -19,19 +19,19 @@ import model.enums.CategoriaDespesa;
 import model.enums.CategoriaReceita;
 
 
-public class CadastroForm extends javax.swing.JPanel {
+public class CadastroContent extends javax.swing.JPanel {
 
     String[] catDespesaOptions;
     String[] catReceitaOptions;
     
     Conta c;
     
-    public CadastroForm() {
+    public CadastroContent() {
         initComponents();
         init();
     }
     
-    public CadastroForm(Conta conta) {
+    public CadastroContent(Conta conta) {
         c = conta;
         initComponents();
         init();
@@ -75,7 +75,7 @@ public class CadastroForm extends javax.swing.JPanel {
         rbTipoDespesa = new javax.swing.JRadioButton();
         rbTipoReceita = new javax.swing.JRadioButton();
         cbCategoria = new javax.swing.JComboBox<>();
-        button1 = new view.component.Button();
+        button1 = new view.components.Button();
         lblData = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JTextField();
         txtValor = new javax.swing.JTextField();
@@ -308,7 +308,7 @@ public class CadastroForm extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.component.Button button1;
+    private view.components.Button button1;
     private javax.swing.JComboBox<String> cbCategoria;
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblData;

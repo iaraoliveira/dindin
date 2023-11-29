@@ -1,4 +1,4 @@
-package view.component;
+package view.components;
 
 import java.awt.Color;
 import java.awt.FontMetrics;
@@ -24,7 +24,7 @@ public class SearchText extends JFormattedTextField{
         Graphics2D g2 = (Graphics2D) grphcs;
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g2.setColor(getBackground());
-        g2.fillRoundRect(0, 0, getWidth(), getHeight(), 25, 25);
+        g2.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
         super.paintComponent(grphcs);
     }
 }

@@ -1,4 +1,4 @@
-package view.component;
+package view.components;
 
 import view.model.TipoStatus;
 
@@ -13,7 +13,7 @@ public class CellStatus extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        status = new view.component.TableStatus();
+        status = new view.components.TableStatus();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -40,6 +40,6 @@ public class CellStatus extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.component.TableStatus status;
+    private view.components.TableStatus status;
     // End of variables declaration//GEN-END:variables
 }

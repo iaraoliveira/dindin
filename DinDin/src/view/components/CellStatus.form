@@ -39,7 +39,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="view.component.TableStatus" name="status">
+    <Component class="view.components.TableStatus" name="status">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="tableStatus1"/>

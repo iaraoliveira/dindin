@@ -7,7 +7,7 @@ package view.pages;
 import java.awt.Color;
 import java.awt.HeadlessException;
 import model.Conta;
-import view.component.PanelBorder;
+import view.components.PanelBorder;
 
 /**
  *
@@ -43,9 +43,9 @@ public class CadastroLancamento extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bg = new view.component.PanelBorder();
-        panelBorder = new view.component.PanelBorder();
-        cadastroForm1 = new view.form.CadastroForm();
+        bg = new view.components.PanelBorder();
+        panelBorder = new view.components.PanelBorder();
+        cadastroForm1 = new view.pages.CadastroContent();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(791, 624));
@@ -152,8 +152,8 @@ public class CadastroLancamento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.component.PanelBorder bg;
-    private view.form.CadastroForm cadastroForm1;
-    private view.component.PanelBorder panelBorder;
+    private view.components.PanelBorder bg;
+    private view.pages.CadastroContent cadastroForm1;
+    private view.components.PanelBorder panelBorder;
     // End of variables declaration//GEN-END:variables
 }
