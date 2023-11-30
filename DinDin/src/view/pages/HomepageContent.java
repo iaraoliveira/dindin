@@ -3,6 +3,7 @@ package view.pages;
 
 import java.awt.Color;
 import java.awt.Dialog;
+import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -14,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Locale;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -58,6 +60,7 @@ public class HomepageContent extends javax.swing.JPanel {
         importaDados(c);
         populaCards(c, LocalDate.now());
         populaTabelaLancamentos(c, LocalDate.now());
+        bntSearch.setIcon(getResizedImage());
 
         //  add row table
         spTable.setVerticalScrollBar(new ScrollBar());
@@ -361,6 +364,16 @@ public class HomepageContent extends javax.swing.JPanel {
             return false;
         }
         return true;
+    }
+    private ImageIcon getResizedImage() {
+        
+        String path = new File("src/view/icon/search.png").getAbsolutePath();
+        ImageIcon imageIcon = new ImageIcon(path); // load the image to a imageIcon
+        Image image = imageIcon.getImage(); // transform it 
+        Image newimg = image.getScaledInstance(16, 16,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+        ImageIcon resizedImage = new ImageIcon(newimg);
+        
+        return resizedImage;   
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

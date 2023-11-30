@@ -1,7 +1,7 @@
 Nome;Data;Valor;Categoria
 Mercado;2023-11-21;150.0;Alimentação
 Abastecer o carro;2023-11-17;100.0;Transporte
-Remédio;2023-11-20;25.9;Saúde
+Remédio;2023-11-20;78.9;Saúde
 Mensalidade Furb;2023-11-11;1400.0;Educação
 Alura;2023-11-10;79.8;Educação
 HBOMax;2023-11-02;8.9;Entretenimento
@@ -9,6 +9,4 @@ Spotify;2023-11-05;9.99;Entretenimento
 Ração Ada;2023-11-18;60.0;Outros
 Presente da Sogrinha;2023-11-11;70.0;Outros
 Ingresso ChurAAASC;2023-11-11;50.0;Outros
-Conta de Luz;2023-11-15;56.8;Residência
-Conta de Luz;2023-11-15;56.8;Residência
 Conta de Luz;2023-11-15;56.8;Residência
