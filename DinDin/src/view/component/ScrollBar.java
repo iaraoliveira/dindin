@@ -1,6 +1,6 @@
-package view.components;
+package view.component;
 
-import view.components.ModernScrollBarUI;
+import view.component.ModernScrollBarUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JScrollBar;

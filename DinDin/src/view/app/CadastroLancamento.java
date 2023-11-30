@@ -1,38 +1,29 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package view.pages;
+package view.app;
 
 import java.awt.Color;
-import java.awt.HeadlessException;
-import model.Conta;
-import view.components.PanelBorder;
 
 /**
  *
  * @author iara9
  */
-public class CadastroLancamento extends javax.swing.JFrame {
+public class CadastroLancamento extends javax.swing.JDialog {
 
-    Conta c;
-    
     /**
      * Creates new form CadastroLancamento
      */
-    public CadastroLancamento() {
-       
+    public CadastroLancamento(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
-        setBackground(new Color(0, 0, 0, 0));
-    }
-
-    public CadastroLancamento(Conta c) {
-    
-        initComponents();
-        setBackground(new Color(0, 0, 0, 0));
+        init();
     }
     
-    
+    public void init() {
+        setBackground(new Color(0, 0, 0, 0));
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,18 +34,17 @@ public class CadastroLancamento extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bg = new view.components.PanelBorder();
-        panelBorder = new view.components.PanelBorder();
+        bg = new view.component.PanelBorder();
+        panelBorder = new view.component.PanelBorder();
         cadastroForm1 = new view.pages.CadastroContent();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(791, 624));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
         bg.setBackground(new java.awt.Color(50, 50, 50, 90));
         bg.setMaximumSize(new java.awt.Dimension(791, 624));
         bg.setMinimumSize(new java.awt.Dimension(791, 624));
-        bg.setPreferredSize(new java.awt.Dimension(791, 624));
+        bg.setPreferredSize(new java.awt.Dimension(917, 639));
 
         panelBorder.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -84,16 +74,16 @@ public class CadastroLancamento extends javax.swing.JFrame {
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
-                .addContainerGap(82, Short.MAX_VALUE)
+                .addContainerGap(144, Short.MAX_VALUE)
                 .addComponent(panelBorder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79))
+                .addGap(143, 143, 143))
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
-                .addContainerGap(78, Short.MAX_VALUE)
+            .addGroup(bgLayout.createSequentialGroup()
+                .addGap(77, 77, 77)
                 .addComponent(panelBorder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -139,21 +129,25 @@ public class CadastroLancamento extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(CadastroLancamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroLancamento().setVisible(true);
+                CadastroLancamento dialog = new CadastroLancamento(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.components.PanelBorder bg;
+    private view.component.PanelBorder bg;
     private view.pages.CadastroContent cadastroForm1;
-    private view.components.PanelBorder panelBorder;
+    private view.component.PanelBorder panelBorder;
     // End of variables declaration//GEN-END:variables
 }

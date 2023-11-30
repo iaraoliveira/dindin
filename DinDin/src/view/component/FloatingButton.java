@@ -1,5 +1,5 @@
 
-package view.components;
+package view.component;
 
 import java.awt.AWTEvent;
 import java.awt.Color;

@@ -3,6 +3,7 @@ package view.pages;
 
 import java.awt.Color;
 import java.awt.List;
+import java.awt.Window;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -10,7 +11,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.text.MaskFormatter;
 import model.Conta;
 import model.Despesa;
@@ -75,10 +78,11 @@ public class CadastroContent extends javax.swing.JPanel {
         rbTipoDespesa = new javax.swing.JRadioButton();
         rbTipoReceita = new javax.swing.JRadioButton();
         cbCategoria = new javax.swing.JComboBox<>();
-        button1 = new view.components.Button();
+        button1 = new view.component.Button();
         lblData = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JTextField();
         txtValor = new javax.swing.JTextField();
+        button2 = new view.component.Button();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setFont(new java.awt.Font("Yu Gothic UI Light", 0, 12)); // NOI18N
@@ -189,6 +193,16 @@ public class CadastroContent extends javax.swing.JPanel {
             }
         });
 
+        button2.setBackground(new java.awt.Color(204, 204, 204));
+        button2.setForeground(new java.awt.Color(51, 51, 51));
+        button2.setText("Cancelar");
+        button2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -198,7 +212,10 @@ public class CadastroContent extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblData)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cbCategoria, 0, 568, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
@@ -246,7 +263,9 @@ public class CadastroContent extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -306,9 +325,15 @@ public class CadastroContent extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDataKeyTyped
 
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        Window w = SwingUtilities.getWindowAncestor(this);
+        w.setVisible(false);
+    }//GEN-LAST:event_button2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.components.Button button1;
+    private view.component.Button button1;
+    private view.component.Button button2;
     private javax.swing.JComboBox<String> cbCategoria;
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblData;

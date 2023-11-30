@@ -1,4 +1,4 @@
-package view.components;
+package view.component;
 
 import view.model.TipoStatus;
 import java.awt.Color;

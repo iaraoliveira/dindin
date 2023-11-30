@@ -7,28 +7,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLayer;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.table.DefaultTableModel;
-import model.Conta;
-import model.Despesa;
-import model.Importador;
-import model.Lancamento;
-import model.Receita;
-import view.components.FloatingButton;
-import view.components.ScrollBar;
+import view.component.FloatingButton;
 import view.pages.HomepageContent;
-import view.model.ModelCard;
 
 public class Main extends javax.swing.JFrame {
     
@@ -43,7 +26,7 @@ public class Main extends javax.swing.JFrame {
         lblIcon.setIcon(getResizedImage());
                 
         HomepageContent home = new HomepageContent();
-        panelContent.add(new JLayer(home, new FloatingButton()));;
+        panelContent.add(new JLayer(home, new FloatingButton()));
         
     }
 
@@ -69,7 +52,7 @@ public class Main extends javax.swing.JFrame {
         
     private ImageIcon getResizedImage() {
         
-        String path = new File("src/newview/icon/close_icon.png").getAbsolutePath();
+        String path = new File("src/view/icon/close_icon.png").getAbsolutePath();
         ImageIcon imageIcon = new ImageIcon(path); // load the image to a imageIcon
         Image image = imageIcon.getImage(); // transform it 
         Image newimg = image.getScaledInstance(18, 18,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
@@ -87,7 +70,7 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelBorder = new view.components.PanelBorder();
+        panelBorder = new view.component.PanelBorder();
         panelHeader = new javax.swing.JPanel();
         lblIcon = new javax.swing.JLabel();
         panelContent = new javax.swing.JPanel();
@@ -201,7 +184,7 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblIcon;
-    private view.components.PanelBorder panelBorder;
+    private view.component.PanelBorder panelBorder;
     private javax.swing.JPanel panelContent;
     private javax.swing.JPanel panelHeader;
     // End of variables declaration//GEN-END:variables

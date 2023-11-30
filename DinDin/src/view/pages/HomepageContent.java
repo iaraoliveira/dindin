@@ -5,6 +5,7 @@
 package view.pages;
 
 import java.awt.Color;
+import java.awt.Dialog;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
@@ -13,6 +14,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +24,8 @@ import model.Despesa;
 import model.Importador;
 import model.Lancamento;
 import model.Receita;
-import view.components.ScrollBar;
+import view.app.CadastroLancamento;
+import view.component.ScrollBar;
 import view.model.ModelCard;
 
 /**
@@ -118,7 +122,6 @@ public class HomepageContent extends javax.swing.JPanel {
             table.addRow(new Object[]{d.getNome(), dateFormatter.format(d.getData()),currencyFormatter.format(d.getValor()), d.getCategoria()});
           
         }
-        
     }
     
     public void populaTabelaReceitas(Conta c, LocalDate dt){
@@ -129,14 +132,17 @@ public class HomepageContent extends javax.swing.JPanel {
             table.addRow(new Object[]{r.getNome(), dateFormatter.format(r.getData()), currencyFormatter.format(r.getValor()), r.getCategoria()});
           
         }
-        
     }
     
     public void actionButton(){
         System.out.println("Action Button");
-        //TO-DO: open dialog
-        
+        JFrame parent = (JFrame) new HomepageContent().getParent();
+        CadastroLancamento dialog = new CadastroLancamento(parent, true);
+        dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setVisible(true);
     }
+    
     private void clearTableRows() {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
@@ -153,14 +159,14 @@ public class HomepageContent extends javax.swing.JPanel {
     private void initComponents() {
 
         cardContainerPanel = new javax.swing.JLayeredPane();
-        card1 = new view.components.Card();
-        card2 = new view.components.Card();
-        card3 = new view.components.Card();
-        tableContainerPanel = new view.components.PanelBorder();
+        card1 = new view.component.Card();
+        card2 = new view.component.Card();
+        card3 = new view.component.Card();
+        tableContainerPanel = new view.component.PanelBorder();
         spTable = new javax.swing.JScrollPane();
-        table = new view.components.Table();
+        table = new view.component.Table();
         lblTitle = new javax.swing.JLabel();
-        searchText1 = new view.components.SearchText();
+        searchText1 = new view.component.SearchText();
         lblSubtitle = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(917, 591));
@@ -292,15 +298,18 @@ public class HomepageContent extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void card1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_card1MouseClicked
-
+        clearTableRows();
+        populaTabelaLancamentos(c, LocalDate.now());
     }//GEN-LAST:event_card1MouseClicked
 
     private void card2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_card2MouseClicked
-
+        clearTableRows();
+        populaTabelaDespesas(c, LocalDate.now());
     }//GEN-LAST:event_card2MouseClicked
 
     private void card3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_card3MouseClicked
-
+        clearTableRows();
+        populaTabelaReceitas(c, LocalDate.now());
     }//GEN-LAST:event_card3MouseClicked
 
     private void card3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_card3KeyPressed
@@ -313,15 +322,15 @@ public class HomepageContent extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.components.Card card1;
-    private view.components.Card card2;
-    private view.components.Card card3;
+    private view.component.Card card1;
+    private view.component.Card card2;
+    private view.component.Card card3;
     private javax.swing.JLayeredPane cardContainerPanel;
     private javax.swing.JLabel lblSubtitle;
     private javax.swing.JLabel lblTitle;
-    private view.components.SearchText searchText1;
+    private view.component.SearchText searchText1;
     private javax.swing.JScrollPane spTable;
-    private view.components.Table table;
-    private view.components.PanelBorder tableContainerPanel;
+    private view.component.Table table;
+    private view.component.PanelBorder tableContainerPanel;
     // End of variables declaration//GEN-END:variables
 }
