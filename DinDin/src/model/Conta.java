@@ -29,7 +29,6 @@ public class Conta {
     public void incluirDespesa(Despesa d){
         despesas.add(d);
         lancamentos.add(d);
-        
         //decrementa saldo da conta
         LocalDate today = LocalDate.now();
         if (d.getData().isBefore(today) || d.getData().isEqual(today)){
@@ -45,15 +44,12 @@ public class Conta {
     public void incluirReceita(Receita r){
         receitas.add(r);
         lancamentos.add(r);
-        
         // incrementa saldo da conta
         LocalDate today = LocalDate.now();
         if (r.getData().isBefore(today) || r.getData().isEqual(today)){
             double s = saldo + r.getValor();
             setSaldo(s);
         }
-        
-        System.out.println(r);
     }
 
     /**

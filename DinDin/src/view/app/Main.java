@@ -15,19 +15,20 @@ import view.pages.HomepageContent;
 
 public class Main extends javax.swing.JFrame {
     
+    HomepageContent home = new HomepageContent();
+    
     public Main() {
         initComponents();
+        setBackground(new Color(0, 0, 0, 0));
+        lblIcon.setIcon(getResizedImage());
+        
         init();
+        
         initMoving(this);
     }
     
     private void init(){    
-        setBackground(new Color(0, 0, 0, 0));
-        lblIcon.setIcon(getResizedImage());
-                
-        HomepageContent home = new HomepageContent();
         panelContent.add(new JLayer(home, new FloatingButton()));
-        
     }
 
     private int x;
@@ -49,7 +50,6 @@ public class Main extends javax.swing.JFrame {
         });
     }
     
-        
     private ImageIcon getResizedImage() {
         
         String path = new File("src/view/icon/close_icon.png").getAbsolutePath();
@@ -143,6 +143,7 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIconMouseClicked
+        home.exportarDados();
         System.exit(0);
 
     }//GEN-LAST:event_lblIconMouseClicked
