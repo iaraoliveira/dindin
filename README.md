@@ -12,7 +12,7 @@
 
 Trabalho final para a disciplina de Programação Orientada a Objetos da FURB, segundo semestre.<br/>
 A entrega deverá ser realizada até dia <b>26/11/2023</b>.<br/>
-Apresentação do trabalho no dia: <b>?</b><br/>
+Apresentação do trabalho no dia: 30/11/2023<b>?</b><br/>
 
 <br/>
 <a name="sobre"/>
